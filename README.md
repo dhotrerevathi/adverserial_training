@@ -227,7 +227,7 @@ Fig 8: PGD Attack - Targeted Adversarial Examples with perturbations using VGG16
 
 Fig 9: Targeted Adversarial Examples with perturbations using ResNet50 model
 
-Implications and Conclusions
+### Implications and Conclusions
 
 The results demonstrate that targeted adversarial attacks present a severe security concern for traffic sign recognition systems. PGD attacks can reliably cause specific misclassifications with minimal visual changes to the input images. This is particularly concerning for safety-critical applications like autonomous driving, where a Stop sign being misclassified as a Speed Limit sign could lead to dangerous scenarios.
 
