@@ -85,7 +85,6 @@ Figures of Adversarial Images:
  
 ![image](https://github.com/user-attachments/assets/66217add-4f23-49fb-8e13-f3895ee3605d)
  
-Fig 5: Clean and Perturbed Images(ε) of FGSM and PGD attacks under VGG16 and ResNet50 Models
 
 ### Analysis of Targeted Adversarial Attacks on Traffic Sign Recognition Models
 VGG16 Model Analysis
