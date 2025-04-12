@@ -276,4 +276,40 @@ The significant performance gap between PGD and FGSM attacks underscores the imp
 These findings emphasize the need for robust adversarial defenses in machine learning systems deployed in safety-critical environments, as even small, imperceptible perturbations can cause reliable and potentially dangerous misclassification.
 
 
+### ADVERSARIAL TRAINER DEFENSE
+
+**Data Preparation and Augmentation**
+
+The implementation includes two complementary augmentation strategies:
+-	Class Balancing Augmentation: The code addresses the inherent class imbalance in the GTSRB dataset by ensuring each class has a minimum of 500 samples. This is achieved through targeted augmentation of underrepresented classes using geometric transformations such as rotation, shifting, scaling, and shearing.
+-	Online Augmentation During Training: During each training batch, lightweight augmentations (brightness/contrast adjustments, blur, noise) are applied before generating adversarial examples. This approach helps the model learn to recognize traffic signs under both natural variations and adversarial perturbations.
+
+**Model Architecture Enhancements**
+
+The implementation features improved model architectures for both VGG16 and ResNet50:
+-	Input Size Optimization: The models can use 224×224 input images to better leverage the pre-trained architectures originally designed for larger images, but we used 32x32 as per our available resources.
+-	Selective Layer Unfreezing: Rather than freezing all pre-trained layers, the implementation selectively unfreezes higher-level layers (last 8 layers for VGG16 and last 20 for ResNet50) to allow better adaptation to the traffic sign domain.
+-	Enhanced Classification Layers: The top layers include dual dense layers (1024 and 512 units) with Batch Normalization and appropriate dropout rates to prevent overfitting.
+
+**Adversarial Training Process**
+
+The implementation uses a sophisticated adversarial training approach:
+-	Dual Attack Training: Models are trained against both Fast Gradient Sign Method (FGSM) and Projected Gradient Descent (PGD) attacks separately to evaluate which provides better defense capabilities.
+-	Mixed-Batch Training: Each training batch consists of 50% clean (augmented) images and 50% adversarial perturbed images, creating a balanced learning environment.
+-	Progressive Evaluation: The training process includes periodic evaluation of clean accuracy to ensure the model maintains high performance on unperturbed images.
+
+**Comprehensive Evaluation Framework**
+
+The code implements a thorough evaluation methodology:
+-	Multi-Epsilon Testing: Models are evaluated against adversarial examples generated with ten different perturbation magnitudes (epsilon(ε) from 1/255 to 80/255).
+-	Dual Attack Evaluation: Each model is tested against both FGSM and PGD attacks, regardless of which attack was used during training.
+
+**Baseline Comparison**: Results are compared against baseline models trained on clean data, providing clear measurements of robustness improvement.
+
+![image](https://github.com/user-attachments/assets/1cc461e9-001e-4f08-9afb-a284a36be98b)
+
+
+**Conclusion**
+
+This implementation represents a comprehensive approach to adversarial training defense for traffic sign recognition. Combining data augmentation, architectural improvements, and sophisticated training strategies addresses the limitations of the previous implementations above. The results demonstrate that properly implemented adversarial training can successfully maintain high classification accuracy while significantly improving robustness against adversarial attacks.
 
