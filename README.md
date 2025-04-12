@@ -47,6 +47,41 @@ ResNet50 Model:
 Fig 3: Loss and accuracy plots for Resnet50 Model
 
 
+Key Observations:
+
+Both models achieve high test accuracy, confirming strong generalization on unseen traffic sign data.
+-	VGG16 has higher test accuracy (95.96%) than validation accuracy (88.31%), suggesting:
+-	The model benefits from additional regularization during testing. Possibly more noise or class imbalance in the validation split.
+-	ResNet50 achieves the best validation accuracy (88.89%) and slightly outperforms VGG16 on the test set (97.17%).
+
+Loss and Accuracy Plot Insights:
+
+VGG16:
+-	Rapid improvement in training accuracy; training accuracy hits ~99.5%.
+-	Validation accuracy is steadily increasing, showing learning without overfitting.
+-	Both train and validation loss decrease smoothly (right plot), indicating convergence.
+
+ResNet50:
+-	More consistent convergence pattern.
+-	Validation loss decreases sharply even though training loss remains low — shows that ResNet50 generalizes slightly better under regularization.
+-	Validation accuracy improvement is smoother than VGG16, which reflects ResNet50's deeper architecture handling complexity better.
+
+
+Model Insights and Observations
+
+On Dataset:
+-	GTSRB is well-structured with 43 classes and relatively balanced categories.
+-	High intra-class similarity (e.g., multiple speed limit signs) makes it a challenging classification task requiring spatial feature awareness.
+
+On Model Choice:
+-	VGG16 is simpler but performs well: It’s effective in structured tasks like traffic sign classification, with lower memory usage and faster training.
+-	ResNet50's skip connections improve depth learning and generalization — leading to slightly better performance on unseen data, especially for subtle shape differences.
+
+On Overfitting & Regularization:
+-	VGG16 might benefit from early stopping or more aggressive dropout, as its training accuracy is much higher than validation.
+-	ResNet50 shows better generalization capacity, supported by the close match between validation and test performance.
+
+
 Classification accuracy of the models on clean and adversarial images.
 
 In this task, two common white-box evasion attacks against the trained deep-learning models are implemented: 
